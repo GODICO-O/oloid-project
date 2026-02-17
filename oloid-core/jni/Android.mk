@@ -1,21 +1,24 @@
 LOCAL_PATH := $(call my-dir)
+# Jalur dari oloid-core/jni ke root project
+ROOT_PROJECT := $(LOCAL_PATH)/../..
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Pastikan path ke Dobby benar sesuai struktur tree lo
-DOBBY_SRC := ../../Dobby/source
+# Tambahkan include path yang presisi
+LOCAL_C_INCLUDES := $(ROOT_PROJECT)/Dobby/include $(ROOT_PROJECT)/Dobby/source
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Dobby/include $(LOCAL_PATH)/../../Dobby/source
+# Source utama
+LOCAL_SRC_FILES := main.cpp
 
-# HANYA compile main.cpp dan biner Dobby
-LOCAL_SRC_FILES := main.cpp \
-    $(DOBBY_SRC)/dobby.cpp \
-    $(DOBBY_SRC)/Interceptor.cpp \
-    $(DOBBY_SRC)/TrampolineBridge/Trampoline/trampoline_arm64.cc \
-    $(DOBBY_SRC)/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
-    $(DOBBY_SRC)/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
-    $(DOBBY_SRC)/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
+# Masukkan Dobby Source dengan path yang benar
+LOCAL_SRC_FILES += \
+    ../../Dobby/source/dobby.cpp \
+    ../../Dobby/source/Interceptor.cpp \
+    ../../Dobby/source/TrampolineBridge/Trampoline/trampoline_arm64.cc \
+    ../../Dobby/source/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
+    ../../Dobby/source/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
+    ../../Dobby/source/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
