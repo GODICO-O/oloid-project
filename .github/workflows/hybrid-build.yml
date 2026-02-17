@@ -2,56 +2,25 @@ name: Oloid Hybrid Build (C++ & NativePHP)
 on: [push]
 
 jobs:
-  # JOB 1: Build C++ Core (Jantung Oloid)
   build-core:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup Android NDK
-        uses: nttld/setup-ndk@v3
+        uses: nttld/setup-ndk@v1 # <--- Ganti dari v3 ke v1
         with:
           ndk-version: r25c
+          add-to-path: true
 
       - name: Compile Oloid Core (liboloid.so)
         run: |
-          cd oloid-project/oloid-core
-          $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk APP_ABI=arm64-v8a
+          cd oloid-core
+          $ANDROID_NDK/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk APP_ABI=arm64-v8a
 
       - name: Upload Core Artifact
         uses: actions/upload-artifact@v4
         with:
           name: oloid-core-so
-          path: oloid-project/oloid-core/libs/arm64-v8a/liboloid.so
-
-  # JOB 2: Build NativePHP Dashboard (Otak Oloid)
-  build-dashboard:
-    needs: build-core
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download Oloid Core SO
-        uses: actions/download-artifact@v4
-        with:
-          name: oloid-core-so
-          path: oloid-project/oloid-dashboard/public/native
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-
-      - name: Install NativePHP & Build APK
-        run: |
-          cd oloid-project/oloid-dashboard
-          composer install
-          # Di sini nanti perintah build NativePHP lo
-          echo "Building Oloid Dashboard with Core Injection..."
-
-      - name: Upload Final Oloid APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Oloid-Final-APK
-          path: oloid-project/oloid-dashboard/*.apk
+          path: oloid-core/libs/arm64-v8a/liboloid.so
           
