@@ -9,6 +9,7 @@
 typedef void* (*CCSprite_create_t)(const char*);
 typedef void (*CCNode_addChild_t)(void*, void*, int);
 typedef void (*CCNode_setPosition_t)(void*, float, float);
+typedef int (*DobbyHook_t)(void*, void*, void**);
 
 static bool (*MenuLayer_init_original)(void* self);
 
@@ -28,8 +29,6 @@ bool MenuLayer_init_hook(void* self) {
                 set_pos(logo, 300.0f, 300.0f);
                 add_child(self, logo, 100);
                 LOGI("Oloid: MANIFESTASI VISUAL BERHASIL! 🎨✅");
-            } else {
-                LOGI("Oloid: File oloid_logo.png ilang dari assets! ❌");
             }
         }
         dlclose(handle);
@@ -37,30 +36,25 @@ bool MenuLayer_init_hook(void* self) {
     return result;
 }
 
-// Gunakan deklarasi Dobby eksternal (kita bakal link di workflow)
-extern "C" int DobbyHook(void* target, void* replace, void** origin);
-
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     LOGI("Oloid Core: Memulai proses Hooking Aktif... 🕵️‍♂️");
 
     void* handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
-    if (!handle) {
-        LOGI("Oloid: EROR - Gagal dlopen libcocos2dcpp.so: %s", dlerror());
-        return JNI_VERSION_1_6;
-    }
+    if (!handle) return JNI_VERSION_1_6;
 
     void* target = dlsym(handle, "_ZN9MenuLayer4initEv");
-    if (target) {
-        LOGI("Oloid: Target ketemu di %p. Mencoba membajak... ⚡", target);
-        // Langsung panggil DobbyHook (asumsi sudah terlink)
-        int status = DobbyHook(target, (void*)MenuLayer_init_hook, (void**)&MenuLayer_init_original);
-        if (status == 0) {
-            LOGI("Oloid: HOOKING SUKSES! Tunggu manifes di Menu... ✅");
-        } else {
-            LOGI("Oloid: HOOKING GAGAL! Kode status: %d", status);
-        }
+    
+    // TRIK KLOS: Cari Dobby di seluruh memori yang terbuka
+    void* dobby_ptr = dlsym(RTLD_DEFAULT, "DobbyHook");
+    
+    if (target && dobby_ptr) {
+        LOGI("Oloid: Target & Dobby ditemukan! Melakukan pembajakan... ⚡");
+        DobbyHook_t dobby_hook = (DobbyHook_t)dobby_ptr;
+        dobby_hook(target, (void*)MenuLayer_init_hook, (void**)&MenuLayer_init_original);
+        LOGI("Oloid: HOOKING SUKSES! ✅");
     } else {
-        LOGI("Oloid: EROR - Simbol MenuLayer::init nggak ketemu!");
+        if (!target) LOGI("Oloid: Gagal nemu MenuLayer!");
+        if (!dobby_ptr) LOGI("Oloid: DobbyHook nggak ketemu di memori! Lu perlu masukin libdobby.so ke APK.");
     }
 
     dlclose(handle);
