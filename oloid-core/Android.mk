@@ -2,21 +2,24 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Jalur include yang sudah divalidasi manual lewat 'find'
+# Semua jalur sekarang mengarah ke internal oloid-core
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
+    $(LOCAL_PATH)/common \
     $(LOCAL_PATH)/external \
+    $(LOCAL_PATH)/external/TINYSTL \
     $(LOCAL_PATH)/external/logging \
-    $(LOCAL_PATH)/../Dobby/include \
-    $(LOCAL_PATH)/../Dobby/source
+    $(LOCAL_PATH)/dobby_src \
+    $(LOCAL_PATH)/dobby_src/include
 
+# Source files kita arahkan ke copy-an internal tadi
 LOCAL_SRC_FILES := main.cpp \
-    ../Dobby/source/dobby.cpp \
-    ../Dobby/source/interceptor.cpp \
-    ../Dobby/source/TrampolineBridge/Trampoline/trampoline_arm64.cc \
-    ../Dobby/source/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
-    ../Dobby/source/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
-    ../Dobby/source/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
+    dobby_src/dobby.cpp \
+    dobby_src/interceptor.cpp \
+    dobby_src/TrampolineBridge/Trampoline/trampoline_arm64.cc \
+    dobby_src/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
+    dobby_src/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
+    dobby_src/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
