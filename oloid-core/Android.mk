@@ -2,8 +2,10 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
+# Sekarang kita arahkan ke folder 'external' di dalam oloid-core itu sendiri
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
+    $(LOCAL_PATH)/external \
     $(LOCAL_PATH)/../Dobby/include \
     $(LOCAL_PATH)/../Dobby/source
 
@@ -17,4 +19,5 @@ LOCAL_SRC_FILES := main.cpp \
 
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
+
 include $(BUILD_SHARED_LIBRARY)
