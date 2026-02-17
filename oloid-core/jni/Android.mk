@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Cari semua file cpp dan cc di folder dobby_src secara otomatis
+# Ambil semua file dari dobby_src yang udah kita copy tadi
 FILE_LIST := $(wildcard $(LOCAL_PATH)/dobby_src/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/dobby_src/*.cc)
 
