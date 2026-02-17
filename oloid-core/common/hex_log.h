@@ -1,3 +1,4 @@
+#include "dobby/common.h"
 #include <string.h>
 
 inline void debug_hex_log_buffer(const uint8_t *buffer, uint32_t buffer_size) {

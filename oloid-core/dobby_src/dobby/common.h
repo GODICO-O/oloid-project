@@ -1,11 +1,18 @@
-#include "dobby/types.h"
-#include "dobby/platform_features.h"
-#include "dobby/platform_detect_macro.h"
-#include "dobby/utility_macro.h"
+#pragma once
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
 
-#include "logging/logging.h"
-#include "logging/check_logging.h"
+// Definisi tipe data wajib Dobby
+typedef uintptr_t addr_t;
+typedef uintptr_t zsize_t;
 
-#include "common/os_arch_features.h"
-#include "common/hex_log.h"
-#include "common/pac_kit.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+    // Masukkan deklarasi fungsi standar di sini biar aman
+    void *memcpy(void *dest, const void *src, size_t n);
+    size_t strlen(const char *s);
+#ifdef __cplusplus
+}
+#endif
