@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef USER_MODE_MULTI_THREAD_SUPPORT_H
 #define USER_MODE_MULTI_THREAD_SUPPORT_H
 

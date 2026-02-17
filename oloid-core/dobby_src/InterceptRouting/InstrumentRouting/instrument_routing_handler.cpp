@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "dobby/dobby_internal.h"
 #include "TrampolineBridge/ClosureTrampolineBridge/common_bridge_handler.h"
 #include "InterceptRouting/InstrumentRouting.h"

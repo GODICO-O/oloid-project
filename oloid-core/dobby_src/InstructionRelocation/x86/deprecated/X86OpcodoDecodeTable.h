@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef X86_OPCODE_DECODE_TABLE_H
 #define X86_OPCODE_DECODE_TABLE_H
 

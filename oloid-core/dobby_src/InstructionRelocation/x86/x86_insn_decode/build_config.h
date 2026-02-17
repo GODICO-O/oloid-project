@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef BUILD_CONFIG_H
 #define BUILD_CONFIG_H
 

@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef ARCH_IA32_REGISTERS
 #define ARCH_IA32_REGISTERS
 

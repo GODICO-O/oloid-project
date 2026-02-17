@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef CORE_ASSEMBLER_ARCH_H
 #define CORE_ASSEMBLER_ARCH_H
 

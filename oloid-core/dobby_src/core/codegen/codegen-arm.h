@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef CORE_CODEGEN_ARM_H
 #define CORE_CODEGEN_ARM_H
 

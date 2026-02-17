@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "dobby.h"
 #include "dobby/common.h"
 #include "Interceptor.h"

@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef ARCH_X64_REGISTERS
 #define ARCH_X64_REGISTERS
 

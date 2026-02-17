@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef _mach_vm_user_
 #define _mach_vm_user_
 

@@ -20,11 +20,6 @@ LOCAL_SRC_FILES := main.cpp \
     dobby_src/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
 LOCAL_LDLIBS := -llog -landroid -ldl
-
-# SUNTIKAN HEADER GLOBAL - JANGAN SAMPAI TYPO
-LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI \
-                -include string.h \
-                -include stdio.h \
-                -include stdlib.h
+LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI -Wno-error=implicit-function-declaration
 
 include $(BUILD_SHARED_LIBRARY)

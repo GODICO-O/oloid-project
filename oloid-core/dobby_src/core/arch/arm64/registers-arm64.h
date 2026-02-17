@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #pragma once
 
 #include "core/arch/arm64/constants-arm64.h"

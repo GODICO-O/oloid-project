@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #pragma once
 
 #if !defined(DISABLE_ARCH_DETECT)

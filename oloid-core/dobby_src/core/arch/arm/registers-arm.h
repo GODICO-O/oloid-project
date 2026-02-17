@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef ARCH_ARM_REGISTERS
 #define ARCH_ARM_REGISTERS
 

@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef CORE_ARCH_CONSTANTS_ARM_H
 #define CORE_ARCH_CONSTANTS_ARM_H
 

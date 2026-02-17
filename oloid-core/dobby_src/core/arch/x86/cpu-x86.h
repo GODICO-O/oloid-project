@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef CORE_ARCH_CPU_X86_H
 #define CORE_ARCH_CPU_X86_H
 
