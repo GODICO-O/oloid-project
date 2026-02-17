@@ -1,25 +1,23 @@
 LOCAL_PATH := $(call my-dir)
-DOBBY_SRC_PATH := $(LOCAL_PATH)/../../Dobby
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Tambahkan main.cpp kita
-LOCAL_SRC_FILES := main.cpp
+# Pastikan path ke Dobby benar sesuai struktur tree lo
+DOBBY_SRC := ../../Dobby/source
 
-# --- MULAI INTEGRASI DOBBY SOURCE (IDENTIK DENGAN GEODE) ---
-LOCAL_C_INCLUDES := $(DOBBY_SRC_PATH)/include $(DOBBY_SRC_PATH)/source
-LOCAL_CFLAGS := -fPIC -O2 -DDOBBY_GENERIC_ABI
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Dobby/include $(LOCAL_PATH)/../../Dobby/source
 
-# Masukkan source code inti Dobby agar ter-compile jadi satu
-LOCAL_SRC_FILES += \
-    ../../Dobby/source/dobby.cpp \
-    ../../Dobby/source/Interceptor.cpp \
-    ../../Dobby/source/TrampolineBridge/Trampoline/trampoline_arm64.cc \
-    ../../Dobby/source/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
-    ../../Dobby/source/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
-    ../../Dobby/source/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
+# HANYA compile main.cpp dan biner Dobby
+LOCAL_SRC_FILES := main.cpp \
+    $(DOBBY_SRC)/dobby.cpp \
+    $(DOBBY_SRC)/Interceptor.cpp \
+    $(DOBBY_SRC)/TrampolineBridge/Trampoline/trampoline_arm64.cc \
+    $(DOBBY_SRC)/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
+    $(DOBBY_SRC)/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
+    $(DOBBY_SRC)/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
-# Log & Android system libs
 LOCAL_LDLIBS := -llog -landroid -ldl
+LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
+
 include $(BUILD_SHARED_LIBRARY)
