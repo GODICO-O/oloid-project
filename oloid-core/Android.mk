@@ -1,5 +1,4 @@
 LOCAL_PATH := $(call my-dir)
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
@@ -9,7 +8,7 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../Dobby/include \
     $(LOCAL_PATH)/../Dobby/source
 
-# Source files dengan path relatif dari oloid-core/
+# Source files (Sudah disesuaikan: interceptor kecil, InstructionRelocation kapital)
 LOCAL_SRC_FILES := main.cpp \
     ../Dobby/source/dobby.cpp \
     ../Dobby/source/interceptor.cpp \
@@ -20,5 +19,4 @@ LOCAL_SRC_FILES := main.cpp \
 
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
-
 include $(BUILD_SHARED_LIBRARY)
