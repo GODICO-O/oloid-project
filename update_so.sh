@@ -1,24 +1,24 @@
 #!/bin/bash
-echo "🚀 Memulai proses Push ke GitHub..."
+echo "🚀 Memulai Push ke GitHub..."
 git add .
-git commit -m "Visi KLOS: Auto-update library visual"
+git commit -m "Visi KLOS: Integrasi Visual Hook"
 git push
 
-echo "⏳ Menunggu GitHub Actions memproses build (sekitar 30-40 detik)..."
-# Tunggu sebentar biar workflow-nya mulai jalan
-sleep 45
+echo ""
+echo "🌍 CEK BROWSER SEKARANG!"
+echo "Tunggu sampai centang hijau di GitHub Actions kelar."
+read -p "Kalau sudah kelar, tekan [ENTER] buat lanjut download..."
 
-echo "📥 Mendownload file oloid-core-so.zip terbaru..."
-# Mengambil artifact terbaru menggunakan GitHub CLI (Pastikan gh auth login sudah dilakukan)
+echo "📥 Mendownload hasil build..."
 RUN_ID=$(gh run list --workflow="build-core" --limit 1 --json databaseId -q '.[0].databaseId')
 gh run download $RUN_ID --name oloid-core-so --dir ./tmp_download
 
-echo "📦 Mengekstrak dan memindahkan ke Storage Utama..."
+echo "📦 Mengekstrak ke Storage (/sdcard/)..."
 unzip -o ./tmp_download/oloid-core-so.zip -d ./tmp_download
 mv ./tmp_download/liboloid_core.so /sdcard/liboloid_core.so
 
-echo "🧹 Membersihkan file sampah..."
+echo "🧹 Bersihin sampah..."
 rm -rf ./tmp_download
 
-echo "✅ SELESAI! File liboloid_core.so sudah siap di folder utama internal storage (/sdcard/)."
-echo "Silakan tempel ke APK GD pake APK Editor! ⚡"
+echo "✅ BERES! File liboloid_core.so udah nangkring di storage utama."
+echo "Tinggal tempel pake APK Editor dan cek Logcat! ⚡"

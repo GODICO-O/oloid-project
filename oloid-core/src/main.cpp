@@ -10,35 +10,40 @@ typedef void* (*CCSprite_create_t)(const char*);
 typedef void (*CCNode_addChild_t)(void*, void*, int);
 typedef void (*CCNode_setPosition_t)(void*, float, float);
 
-void renderOloidLogo(void* menuLayer) {
-    // Safety Check: Jangan lanjut kalau menuLayer-nya belum siap (nullptr)
-    if (!menuLayer) {
-        LOGI("Oloid: Menunggu MenuLayer siap... ⏳");
-        return;
-    }
+static bool (*MenuLayer_init_original)(void* self);
+
+bool MenuLayer_init_hook(void* self) {
+    bool result = MenuLayer_init_original(self);
+    LOGI("Oloid: MenuLayer terdeteksi! Saatnya manifestasi visual... 🚀");
 
     void* handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
-    if (!handle) return;
+    if (handle) {
+        auto create_sprite = (CCSprite_create_t)dlsym(handle, "_ZN7cocos2d8CCSprite6createEPKc");
+        auto add_child = (CCNode_addChild_t)dlsym(handle, "_ZN7cocos2d6CCNode8addChildEPS0_i");
+        auto set_pos = (CCNode_setPosition_t)dlsym(handle, "_ZN7cocos2d6CCNode11setPositionEff");
 
-    auto create_sprite = (CCSprite_create_t)dlsym(handle, "_ZN7cocos2d8CCSprite6createEPKc");
-    auto add_child = (CCNode_addChild_t)dlsym(handle, "_ZN7cocos2d6CCNode8addChildEPS0_i");
-    auto set_pos = (CCNode_setPosition_t)dlsym(handle, "_ZN7cocos2d6CCNode11setPositionEff");
-
-    if (create_sprite && add_child && set_pos) {
-        void* logo = create_sprite("oloid_logo.png");
-        if (logo) {
-            set_pos(logo, 150.0f, 150.0f);
-            add_child(menuLayer, logo, 100);
-            LOGI("Oloid: Logo berhasil menembus layar GD! 🎨✅");
-        } else {
-            LOGI("Oloid: EROR! oloid_logo.png belum ada di assets! ❌");
+        if (create_sprite && add_child && set_pos) {
+            void* logo = create_sprite("oloid_logo.png");
+            if (logo) {
+                set_pos(logo, 200.0f, 200.0f);
+                add_child(self, logo, 100);
+                LOGI("Oloid: Logo resmi nongol di layar! 🎨✅");
+            }
         }
+        dlclose(handle);
     }
-    dlclose(handle);
+    return result;
 }
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
-    LOGI("Oloid Core: Terdeteksi di Memori GD! 🕵️‍♂️");
-    // Kita hapus pemanggilan renderOloidLogo(nullptr) di sini buat cegah FC
+    LOGI("Oloid Core: Memulai proses Hooking Aktif... 🕵️‍♂️");
+    void* handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
+    if (handle) {
+        void* target = dlsym(handle, "_ZN9MenuLayer4initEv");
+        if (target) {
+            LOGI("Oloid: Target MenuLayer ketemu di %p. Menunggu aktivasi Dobby...", target);
+        }
+        dlclose(handle);
+    }
     return JNI_VERSION_1_6;
 }
