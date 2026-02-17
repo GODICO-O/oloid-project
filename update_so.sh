@@ -1,17 +1,16 @@
 #!/bin/bash
 echo "🚀 Memulai Push ke GitHub..."
 git add .
-git commit -m "Visi KLOS: Perbaikan Jalur Download"
+git commit -m "Visi KLOS: Fix Artifact Download"
 git push
 
 echo ""
 echo "🌍 CEK BROWSER SEKARANG!"
 echo "Link: https://github.com/GODICO-O/oloid-project/actions"
-echo "Tunggu sampai centang hijau kelar."
+echo "Pastikan build sudah 'Success' (Centang Hijau)."
 read -p "Kalau sudah kelar, tekan [ENTER] buat lanjut download..."
 
 echo "📥 Mendownload hasil build terbaru..."
-# Kita ambil ID dari run terakhir tanpa peduli nama workflow
 RUN_ID=$(gh run list --limit 1 --json databaseId -q '.[0].databaseId')
 
 if [ -z "$RUN_ID" ]; then
@@ -19,18 +18,22 @@ if [ -z "$RUN_ID" ]; then
     exit 1
 fi
 
-# Download artifact-nya
-gh run download $RUN_ID --name oloid-core-so --dir ./tmp_download
+# Kita download TANPA spesifik nama, biar dia ambil semua yang ada
+gh run download $RUN_ID --dir ./tmp_download
 
-echo "📦 Mengekstrak ke Storage (/sdcard/)..."
-if [ -f "./tmp_download/oloid-core-so.zip" ]; then
-    unzip -o ./tmp_download/oloid-core-so.zip -d ./tmp_download
-    mv ./tmp_download/liboloid_core.so /sdcard/liboloid_core.so
-    echo "✅ BERES! File liboloid_core.so udah nangkring di storage utama."
+echo "📦 Mencari dan memindahkan file .so ke Storage..."
+# Cari file liboloid_core.so di folder manapun di dalam tmp_download
+SO_FILE=$(find ./tmp_download -name "liboloid_core.so" | head -n 1)
+
+if [ -f "$SO_FILE" ]; then
+    mv "$SO_FILE" /sdcard/liboloid_core.so
+    echo "✅ BERES! liboloid_core.so sudah dipindah ke /sdcard/."
 else
-    echo "❌ Error: File zip nggak ketemu! Cek apakah Artifact namanya beneran 'oloid-core-so'."
+    echo "❌ Error: File .so tidak ditemukan di dalam artifact!"
+    echo "Isi folder download adalah:"
+    ls -R ./tmp_download
 fi
 
 echo "🧹 Bersihin sampah..."
 rm -rf ./tmp_download
-echo "Tinggal tempel pake APK Editor dan cek Logcat! ⚡"
+echo "Silakan cek di storage utama lo! ⚡"
