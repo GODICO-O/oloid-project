@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Tambahkan jalur ke folder external agar TINYSTL ditemukan
+# KUNCI: Kita masukkan folder 'external' agar TINYSTL/vector.h bisa ditemukan
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
     $(LOCAL_PATH)/../Dobby/include \
@@ -19,4 +19,5 @@ LOCAL_SRC_FILES := main.cpp \
 
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
+
 include $(BUILD_SHARED_LIBRARY)
