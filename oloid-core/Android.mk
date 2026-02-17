@@ -2,10 +2,11 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Sekarang kita arahkan ke folder 'external' di dalam oloid-core itu sendiri
+# Jalur include yang sudah divalidasi manual lewat 'find'
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
     $(LOCAL_PATH)/external \
+    $(LOCAL_PATH)/external/logging \
     $(LOCAL_PATH)/../Dobby/include \
     $(LOCAL_PATH)/../Dobby/source
 
