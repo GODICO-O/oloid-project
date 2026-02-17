@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <android/log.h>
 #include <dlfcn.h>
-#include "include/dobby.h"
+#include "dobby.h"
 
 #define LOG_TAG "OLOID_PROJECT"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
