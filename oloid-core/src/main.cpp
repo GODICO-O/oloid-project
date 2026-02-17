@@ -6,18 +6,15 @@
 #define LOG_TAG "OLOID_PROJECT"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
-// Definisi fungsi internal Cocos2d-x
 typedef void* (*CCSprite_create_t)(const char*);
 typedef void (*CCNode_addChild_t)(void*, void*, int);
 typedef void (*CCNode_setPosition_t)(void*, float, float);
 
-// Pointer untuk fungsi asli
 static bool (*MenuLayer_init_original)(void* self);
 
-// Fungsi Hook yang akan dipanggil saat MenuLayer terbuka
 bool MenuLayer_init_hook(void* self) {
     bool result = MenuLayer_init_original(self);
-    LOGI("Oloid: MenuLayer terdeteksi! Mengeksekusi manifestasi visual... 🚀");
+    LOGI("Oloid: Hook Aktif! MenuLayer kebuka! 🚀");
 
     void* handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
     if (handle) {
@@ -28,10 +25,11 @@ bool MenuLayer_init_hook(void* self) {
         if (create_sprite && add_child && set_pos) {
             void* logo = create_sprite("oloid_logo.png");
             if (logo) {
-                // Posisi: X=300, Y=300 (biar agak ke tengah layar Poco M5)
                 set_pos(logo, 300.0f, 300.0f);
                 add_child(self, logo, 100);
-                LOGI("Oloid: LOGO BERHASIL DITEMPEL! 🎨✅");
+                LOGI("Oloid: MANIFESTASI VISUAL BERHASIL! 🎨✅");
+            } else {
+                LOGI("Oloid: File oloid_logo.png ilang dari assets! ❌");
             }
         }
         dlclose(handle);
@@ -39,28 +37,32 @@ bool MenuLayer_init_hook(void* self) {
     return result;
 }
 
-// Tipe data fungsi Dobby
-typedef int (*DobbyHook_t)(void*, void*, void**);
+// Gunakan deklarasi Dobby eksternal (kita bakal link di workflow)
+extern "C" int DobbyHook(void* target, void* replace, void** origin);
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     LOGI("Oloid Core: Memulai proses Hooking Aktif... 🕵️‍♂️");
 
-    void* gd_handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
-    if (gd_handle) {
-        void* target = dlsym(gd_handle, "_ZN9MenuLayer4initEv");
-        
-        // Sesuai visi KLOS: Kita pakai Dobby secara dinamis
-        void* dobby_handle = dlopen("libdobby.so", RTLD_LAZY);
-        if (!dobby_handle) dobby_handle = dlopen("liboloid_core.so", RTLD_LAZY); // Cek internal
-
-        if (target && dobby_handle) {
-            auto dobby_hook = (DobbyHook_t)dlsym(dobby_handle, "DobbyHook");
-            if (dobby_hook) {
-                dobby_hook(target, (void*)MenuLayer_init_hook, (void**)&MenuLayer_init_original);
-                LOGI("Oloid: Hooking Berhasil! Menunggu lo masuk Menu Utama... ⚡");
-            }
-        }
-        dlclose(gd_handle);
+    void* handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
+    if (!handle) {
+        LOGI("Oloid: EROR - Gagal dlopen libcocos2dcpp.so: %s", dlerror());
+        return JNI_VERSION_1_6;
     }
+
+    void* target = dlsym(handle, "_ZN9MenuLayer4initEv");
+    if (target) {
+        LOGI("Oloid: Target ketemu di %p. Mencoba membajak... ⚡", target);
+        // Langsung panggil DobbyHook (asumsi sudah terlink)
+        int status = DobbyHook(target, (void*)MenuLayer_init_hook, (void**)&MenuLayer_init_original);
+        if (status == 0) {
+            LOGI("Oloid: HOOKING SUKSES! Tunggu manifes di Menu... ✅");
+        } else {
+            LOGI("Oloid: HOOKING GAGAL! Kode status: %d", status);
+        }
+    } else {
+        LOGI("Oloid: EROR - Simbol MenuLayer::init nggak ketemu!");
+    }
+
+    dlclose(handle);
     return JNI_VERSION_1_6;
 }
