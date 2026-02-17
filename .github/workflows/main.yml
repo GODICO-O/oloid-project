@@ -1,8 +1,8 @@
-name: Oloid Hybrid Build (C++ & NativePHP)
+name: Oloid Hybrid Build (Dobby & Core)
 on: [push]
 
 jobs:
-  build-core:
+  build-all:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,12 +13,19 @@ jobs:
           ndk-version: r25c
           add-to-path: true
 
-      - name: Download Dobby Library
+      - name: Build Dobby From Source
         run: |
-          mkdir -p oloid-core/libs/arm64-v8a
-          wget https://github.com/jmpews/Dobby/releases/download/v1.2.6/dobby-android-arm64.zip
-          unzip dobby-android-arm64.zip
-          cp -f dobby-android-arm64/libdobby.so oloid-core/libs/arm64-v8a/
+          git clone --depth 1 https://github.com/jmpews/Dobby.git
+          cd Dobby
+          mkdir build && cd build
+          cmake .. \
+            -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+            -DANDROID_ABI=arm64-v8a \
+            -DANDROID_PLATFORM=android-21 \
+            -DDOBBY_GENERATE_SHARED=ON
+          make -j$(nproc)
+          mkdir -p ../../oloid-core/libs/arm64-v8a/
+          cp libdobby.so ../../oloid-core/libs/arm64-v8a/
 
       - name: Compile Oloid Core
         run: |
@@ -28,7 +35,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: oloid-core-so
+          name: oloid-package
           path: |
             oloid-core/libs/arm64-v8a/liboloid_core.so
             oloid-core/libs/arm64-v8a/libdobby.so
