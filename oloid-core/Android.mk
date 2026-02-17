@@ -2,7 +2,6 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Semua jalur sekarang mengarah ke internal oloid-core
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
     $(LOCAL_PATH)/common \
@@ -12,7 +11,6 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/dobby_src \
     $(LOCAL_PATH)/dobby_src/include
 
-# Source files kita arahkan ke copy-an internal tadi
 LOCAL_SRC_FILES := main.cpp \
     dobby_src/dobby.cpp \
     dobby_src/interceptor.cpp \
@@ -22,6 +20,11 @@ LOCAL_SRC_FILES := main.cpp \
     dobby_src/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
 LOCAL_LDLIBS := -llog -landroid -ldl
-LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
+
+# SUNTIKAN HEADER GLOBAL - JANGAN SAMPAI TYPO
+LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI \
+                -include string.h \
+                -include stdio.h \
+                -include stdlib.h
 
 include $(BUILD_SHARED_LIBRARY)
