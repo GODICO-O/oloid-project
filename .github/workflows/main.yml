@@ -13,12 +13,6 @@ jobs:
           ndk-version: r25c
           add-to-path: true
 
-      - name: Fetch Pre-built Dobby
-        run: |
-          mkdir -p oloid-core/libs/arm64-v8a
-          wget https://github.com/SillyVuton/Dobby-Android/releases/download/v1.0.0/libdobby.so -O oloid-core/libs/arm64-v8a/libdobby.so
-          echo "Dobby Secured!"
-
       - name: Compile Core
         run: |
           cd oloid-core
