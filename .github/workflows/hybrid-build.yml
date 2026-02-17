@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: oloid-core-so
-          path: oloid-core/libs/arm64-v8a/liboloid.so
+          path: oloid-core/libs/arm64-v8a/liboloid_core.so
