@@ -20,6 +20,6 @@ LOCAL_SRC_FILES := main.cpp \
     dobby_src/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
 
 LOCAL_LDLIBS := -llog -landroid -ldl
-LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI -Wno-error=implicit-function-declaration
+LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI -fpermissive
 
 include $(BUILD_SHARED_LIBRARY)

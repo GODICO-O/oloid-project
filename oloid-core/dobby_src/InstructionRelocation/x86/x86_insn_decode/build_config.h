@@ -1,3 +1,7 @@
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
+using namespace std;
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
