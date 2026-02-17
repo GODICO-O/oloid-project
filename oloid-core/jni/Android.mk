@@ -1,25 +1,15 @@
 LOCAL_PATH := $(call my-dir)
-# Jalur dari oloid-core/jni ke root project
-ROOT_PROJECT := $(LOCAL_PATH)/../..
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := oloid_core
 
-# Tambahkan include path yang presisi
-LOCAL_C_INCLUDES := $(ROOT_PROJECT)/Dobby/include $(ROOT_PROJECT)/Dobby/source
+# Cari semua file cpp dan cc di folder dobby_src secara otomatis
+FILE_LIST := $(wildcard $(LOCAL_PATH)/dobby_src/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/dobby_src/*.cc)
 
-# Source utama
-LOCAL_SRC_FILES := main.cpp
+LOCAL_SRC_FILES := main.cpp $(FILE_LIST:$(LOCAL_PATH)/%=%)
 
-# Masukkan Dobby Source dengan path yang benar
-LOCAL_SRC_FILES += \
-    ../../Dobby/source/dobby.cpp \
-    ../../Dobby/source/Interceptor.cpp \
-    ../../Dobby/source/TrampolineBridge/Trampoline/trampoline_arm64.cc \
-    ../../Dobby/source/InstructionRelocation/arm64/InstructionRelocationARM64.cc \
-    ../../Dobby/source/Backend/UserMode/PlatformUtil/Linux/ProcessRuntime.cc \
-    ../../Dobby/source/Backend/UserMode/ExecMemory/code-patch-tool-posix.cc
-
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/dobby_src
 LOCAL_LDLIBS := -llog -landroid -ldl
 LOCAL_CFLAGS := -O2 -fPIC -DDOBBY_GENERIC_ABI
 
