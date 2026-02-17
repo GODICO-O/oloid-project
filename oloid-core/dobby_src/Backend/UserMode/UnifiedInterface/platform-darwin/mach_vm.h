@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef _mach_vm_user_
-#define _mach_vm_user_
-
 /* Module mach_vm */
 
 #include <mach/boolean.h>

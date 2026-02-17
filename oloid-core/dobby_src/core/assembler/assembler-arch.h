@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef CORE_ASSEMBLER_ARCH_H
-#define CORE_ASSEMBLER_ARCH_H
-
 #include "src/assembler.h"
 
 #if 0

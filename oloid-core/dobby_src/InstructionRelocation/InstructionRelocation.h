@@ -1,12 +1,2 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "dobby/dobby_internal.h"
-
-void GenRelocateCode(void *buffer, CodeMemBlock *origin, CodeMemBlock *relocated, bool branch);
 
 void GenRelocateCodeAndBranch(void *buffer, CodeMemBlock *origin, CodeMemBlock *relocated);

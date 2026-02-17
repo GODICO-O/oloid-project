@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "dobby.h"
-#include "dobby/common.h"
-#include "Interceptor.h"
 #include "InterceptRouting/InlineHookRouting.h"
 #include "InterceptRouting/InstrumentRouting.h"
 #include "InterceptRouting/NearBranchTrampoline/NearBranchTrampoline.h"

@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "MultiThreadSupport/ThreadSupport.h"
-
-using namespace zz;
 
 OSThread::LocalStorageKey ThreadSupport::thread_callstack_key_ = 0;
 

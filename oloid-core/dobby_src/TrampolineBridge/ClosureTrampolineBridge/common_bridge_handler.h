@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "dobby/dobby_internal.h"
 
 #include "Interceptor.h"
 #include "TrampolineBridge/ClosureTrampolineBridge/ClosureTrampoline.h"

@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef ARCH_X64_REGISTERS
-#define ARCH_X64_REGISTERS
-
 #include "core/arch/x64/constants-x64.h"
 #include "core/arch/CpuRegister.h"
 

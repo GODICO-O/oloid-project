@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-struct x86_insn_t {};
 
 struct x86_insn_decoder_t {
   uint8_t *buffer;

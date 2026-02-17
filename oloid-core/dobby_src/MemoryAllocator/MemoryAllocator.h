@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "common/linear_allocator.h"
 #include "PlatformUnifiedInterface/platform.h"
 
 #define min(a, b) (((a) < (b)) ? (a) : (b))

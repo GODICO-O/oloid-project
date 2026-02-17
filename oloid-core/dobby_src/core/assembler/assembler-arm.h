@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "dobby/common.h"
 
 #include "core/arch/arm/constants-arm.h"
 #include "core/arch/arm/registers-arm.h"

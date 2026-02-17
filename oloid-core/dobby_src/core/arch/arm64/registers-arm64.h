@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "core/arch/arm64/constants-arm64.h"
 #include "core/arch/CpuRegister.h"
 
 namespace zz {

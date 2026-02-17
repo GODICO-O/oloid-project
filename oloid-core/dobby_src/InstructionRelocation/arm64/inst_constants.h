@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#if 0
 enum LoadRegLiteralOp {
   LoadRegLiteralFixed = 0x18000000,
   LoadRegLiteralFixedMask = 0x3B000000,

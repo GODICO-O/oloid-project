@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef FUNCTION_WRAPPER_H
-#define FUNCTION_WRAPPER_H
-
 #include "dobby/dobby_internal.h"
 
 #include "TrampolineBridge/ClosureTrampolineBridge/ClosureTrampoline.h"

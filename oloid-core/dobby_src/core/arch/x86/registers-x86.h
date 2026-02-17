@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef ARCH_IA32_REGISTERS
-#define ARCH_IA32_REGISTERS
-
 #include "core/arch/x86/constants-x86.h"
 #include "core/arch/Cpu.h"
 

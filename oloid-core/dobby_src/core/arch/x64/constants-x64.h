@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef CORE_ARCH_CONSTANTS_X64_H
-#define CORE_ARCH_CONSTANTS_X64_H
-
 namespace zz {
 namespace x64 {
 

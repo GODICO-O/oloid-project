@@ -1,29 +1,28 @@
 #include <jni.h>
-#include <android/log.h>
-#include <dlfcn.h>
-#include "dobby.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#define LOG_TAG "OLOID_PROJECT"
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
-
-static bool (*MenuLayer_init_original)(void* self);
-
-bool MenuLayer_init_hook(void* self) {
-    LOGI("Oloid: Hook Aktif! Manifestasi Berhasil! 🚀");
-    return MenuLayer_init_original(self);
+// --- THE BRIDGE: Memastikan Dobby bisa akses fungsi standar ---
+extern "C" {
+    void *memcpy(void *dest, const void *src, size_t n);
+    size_t strlen(const char *s);
+    int snprintf(char *str, size_t size, const char *format, ...);
 }
 
-extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
-    LOGI("Oloid Core: Memulai Hooking Aktif... 🕵️‍♂️");
+#include "dobby.h"
 
-    void* cocos_handle = dlopen("libcocos2dcpp.so", RTLD_LAZY);
-    if (cocos_handle) {
-        void* target = dlsym(cocos_handle, "_ZN9MenuLayer4initEv");
-        if (target) {
-            DobbyHook(target, (void*)MenuLayer_init_hook, (void**)&MenuLayer_init_original);
-            LOGI("Oloid: HOOKING SUKSES! ✅");
-        }
-        dlclose(cocos_handle);
-    }
-    return JNI_VERSION_1_6;
+// Logika Hook untuk KLOS
+void (*orig_logic)(void *a, void *b);
+void hook_logic(void *a, void *b) {
+    // Di sini nanti tempat formula KL-Animation lo beraksi
+    orig_logic(a, b);
+}
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_oloid_core_MainActivity_stringFromJNI(JNIEnv* env, jobject /* this */) {
+    // Contoh penggunaan Dobby (Pastikan target address valid nanti)
+    // DobbyHook((void *)0x123456, (void *)hook_logic, (void **)&orig_logic);
+    
+    return env->NewStringUTF("Oloid Core Engine: KLOS Manifested");
 }

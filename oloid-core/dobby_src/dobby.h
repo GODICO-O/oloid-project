@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef dobby_h
-#define dobby_h
-
 #ifdef __cplusplus
 extern "C" {
 #endif

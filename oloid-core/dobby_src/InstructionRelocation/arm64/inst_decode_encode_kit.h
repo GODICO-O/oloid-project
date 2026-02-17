@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "dobby/common.h"
 
 static inline int64_t SignExtend(unsigned long x, int M, int N) {
 #if 1

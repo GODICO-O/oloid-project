@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "dobby/dobby_internal.h"
-#include "TrampolineBridge/ClosureTrampolineBridge/common_bridge_handler.h"
-#include "InterceptRouting/InstrumentRouting.h"
 #include "logging/logging.h"
 
 void instrument_forward_handler(Interceptor::Entry *entry, DobbyRegisterContext *ctx);

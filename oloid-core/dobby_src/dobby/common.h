@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "dobby.h"
 #include "dobby/types.h"
 #include "dobby/platform_features.h"
 #include "dobby/platform_detect_macro.h"

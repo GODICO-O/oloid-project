@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef BUILD_CONFIG_H
-#define BUILD_CONFIG_H
-
 #if defined(__APPLE__)
 // only include TargetConditions after testing ANDROID as some android builds
 // on mac don't have this header available and it's not needed unless the target

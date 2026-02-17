@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef CORE_CODEGEN_ARM_H
-#define CORE_CODEGEN_ARM_H
-
 #include "core/codegen/codegen.h"
 #include "core/assembler/assembler.h"
 #include "core/assembler/assembler-arm.h"

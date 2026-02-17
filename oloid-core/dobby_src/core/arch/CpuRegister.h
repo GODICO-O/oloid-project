@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-struct RegisterBase {
   int reg_id;
 
   static constexpr RegisterBase from_code(int reg_id) {

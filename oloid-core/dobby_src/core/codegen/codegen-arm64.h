@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "core/codegen/codegen.h"
 #include "core/assembler/assembler.h"
 #include "core/assembler/assembler-arm64.h"
 

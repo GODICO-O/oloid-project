@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef FUNCTION_WRAPPER_INTERCEPT_ROUTING_HANDLER_H
-#define FUNCTION_WRAPPER_INTERCEPT_ROUTING_HANDLER_H
-
 #include "TrampolineBridge/ClosureTrampolineBridge/ClosureTrampoline.h"
 #include "Interceptor.h"
 #include "dobby/dobby_internal.h"

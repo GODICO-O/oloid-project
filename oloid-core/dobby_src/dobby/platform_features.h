@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#if defined(__APPLE__) && __arm64e__
 #if __has_feature(ptrauth_calls)
 #include <ptrauth.h>
 #endif

@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "MemoryAllocator/CodeMemBuffer.h"
 
 enum trampoline_type_t {
   TRAMPOLINE_UNKNOWN = 0,

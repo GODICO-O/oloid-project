@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef X86_OPCODE_DECODE_TABLE_H
-#define X86_OPCODE_DECODE_TABLE_H
-
 #ifndef __addr_t_defined
 #define __addr_t_defined
 typedef unsigned long long addr_t;

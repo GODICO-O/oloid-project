@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#ifndef CORE_ARCH_CONSTANTS_ARM_H
-#define CORE_ARCH_CONSTANTS_ARM_H
-
 enum AddrMode { Offset = 0, PreIndex = 1, PostIndex = 2 };
 
 enum Condition {

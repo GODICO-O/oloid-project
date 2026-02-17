@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#include "dobby/dobby_internal.h"
 
 extern "C" void instrument_routing_dispatch(Interceptor::Entry *entry, DobbyRegisterContext *ctx);
 

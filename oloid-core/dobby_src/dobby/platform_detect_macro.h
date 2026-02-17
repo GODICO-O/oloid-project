@@ -1,13 +1,3 @@
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-using namespace std;
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma once
-
-#if !defined(DISABLE_ARCH_DETECT)
 #if defined(__arm__)
 #define TARGET_ARCH_ARM 1
 #elif defined(__arm64__) || defined(__aarch64__)
