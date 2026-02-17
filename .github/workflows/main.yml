@@ -13,13 +13,22 @@ jobs:
           ndk-version: r25c
           add-to-path: true
 
+      - name: Download Dobby Library
+        run: |
+          mkdir -p oloid-core/libs/arm64-v8a
+          wget https://github.com/jmpews/Dobby/releases/download/v1.2.6/dobby-android-arm64.zip
+          unzip dobby-android-arm64.zip
+          cp -f dobby-android-arm64/libdobby.so oloid-core/libs/arm64-v8a/
+
       - name: Compile Oloid Core
         run: |
           cd oloid-core
           ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk APP_ABI=arm64-v8a
 
-      - name: Upload Core Artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: oloid-core-so
-          path: oloid-core/libs/arm64-v8a/liboloid_core.so
+          path: |
+            oloid-core/libs/arm64-v8a/liboloid_core.so
+            oloid-core/libs/arm64-v8a/libdobby.so
